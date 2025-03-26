@@ -9,7 +9,7 @@ dice.classList.add('hidden'); //hide the dice for now
 
 //Secting btn to roll dice and hiold score
 const btnRoll = document.querySelector('.btn--roll');
-const btnHold = document.querySelector('.btn-hold');
+const btnHold = document.querySelector('.btn--hold');
 
 //Assigning different value
 score0El.textContent = 0;
@@ -41,34 +41,15 @@ function checkActivePlayer() {
 
 //Swicthing player
 function switchPlayer() {
+  const activePlayer = checkActivePlayer();
   const player1 = document.querySelector('.player--0');
   const player2 = document.querySelector('.player--1');
-
-  // if (player1.classList.contains('player--active')) {
-  //   player1.classList.remove('player--active');
-  //   player2.classList.add('player--active');
-  // }
-
-  // if (player2.classList.contains('player--active')) {
-  //   player2.classList.remove('player--active');
-  //   player1.classList.add('player--active');
-  // }
-
-  const player = document.querySelectorAll('.player');
-
-  for (let index = 0; index < player.length; index++) {
-    const element = player[index];
-    if (element.classList.contains('player--active')) {
-      //Is that the Player 1
-      if (element.classList.contains('player--0')) {
-        element.classList.remove('player--active');
-        player2.classList.add('player--active');
-      } //If is Player 2
-      else if (element.classList.contains('player--1')) {
-        element.classList.remove('player--active');
-        player2.classList.add('player--active');
-      }
-    }
+  if (activePlayer === 1) {
+    player1.classList.remove('player--active');
+    player2.classList.add('player--active');
+  } else {
+    player2.classList.remove('player--active');
+    player1.classList.add('player--active');
   }
 }
 
@@ -91,10 +72,11 @@ btnRoll.addEventListener('click', function () {
 
   //See who is playing (Player 1 or 2)
   const activePlayer = checkActivePlayer();
+  console.log('Active player : ' + activePlayer);
 
   //Generating random dice roll
   const randomValue = diceValue();
-  console.log(randomValue);
+  console.log('Dice value : ' + randomValue);
 
   //display dice roll (Image)
   displayDice(randomValue);
@@ -123,3 +105,10 @@ btnRoll.addEventListener('click', function () {
 });
 
 //HOLDING SCORE
+btnHold.addEventListener('click', function () {
+  const activePlayer = checkActivePlayer();
+  //Add current to Scoret value of active player
+  activePlayer === 1
+    ? (score0El.textContent = currentScore)
+    : (score1El.textContent = currentScore);
+});
