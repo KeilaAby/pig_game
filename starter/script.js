@@ -3,6 +3,8 @@
 //Selecting element
 const score0El = document.querySelector('#score--0');
 const score1El = document.querySelector('#score--1');
+const current0El = document.querySelector('#current--0');
+const current1El = document.querySelector('#current--1');
 
 const dice = document.querySelector('.dice');
 dice.classList.add('hidden'); //hide the dice for now
@@ -12,8 +14,10 @@ const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 
 //Assigning different value
-score0El.textContent = 0;
-score1El.textContent = 0;
+let totalScore0 = 0;
+let totalScore1 = 0;
+score0El.textContent = totalScore0;
+score1El.textContent = totalScore1;
 let currentScore = 0;
 
 //Generating random dice roll
@@ -64,19 +68,51 @@ function displayScore(currentScore) {
   }
 }
 
+//Add current score to total score
+function addCurrentScoreToTotal(){
+  const activePlayer = checkActivePlayer();
+  if(activePlayer === 1){
+    totalScore0 += currentScore;
+    score0El.textContent = totalScore0;
+    currentScore = 0;
+    current0El.textContent = currentScore;
+    switchPlayer();
+  } else{
+    totalScore1 += currentScore;
+    score1El.textContent = totalScore1;
+    currentScore = 0;
+    current1El.textContent = currentScore;
+    switchPlayer();
+  }
+}
+
+//Define who is the winner
+function defineWinner(){
+  if (totalScore0 === 100){
+    const player1 = document.querySelector('.player--0')
+    player1.style.backgroundColor = '#2f2f2f';
+    // console.log(totalScore0);
+
+  }else if(totalScore1 === 100) {
+    const player2 = document.querySelector('.player--1')
+    player2.style.backgroundColor = '#2f2f2f';
+    // console.log(totalScore1);
+  }
+
+  console.log(totalScore0);
+  console.log(totalScore1);
+
+}
+
 //ROLLING THE DICE
 btnRoll.addEventListener('click', function () {
-  //Selecting currentscore element
-  const current0El = document.querySelector('#current--0');
-  const current1El = document.querySelector('#current--1');
-
+  
   //See who is playing (Player 1 or 2)
   const activePlayer = checkActivePlayer();
-  console.log('Active player : ' + activePlayer);
 
   //Generating random dice roll
   const randomValue = diceValue();
-  console.log('Dice value : ' + randomValue);
+
 
   //display dice roll (Image)
   displayDice(randomValue);
@@ -90,6 +126,7 @@ btnRoll.addEventListener('click', function () {
     activePlayer === 1
       ? (current0El.textContent = currentScore)
       : (current1El.textContent = currentScore);
+
   }
   //Switch to another player
   else {
@@ -102,13 +139,17 @@ btnRoll.addEventListener('click', function () {
       ? (current0El.textContent = currentScore)
       : (current1El.textContent = currentScore);
   }
+
 });
 
 //HOLDING SCORE
 btnHold.addEventListener('click', function () {
-  const activePlayer = checkActivePlayer();
-  //Add current to Scoret value of active player
-  activePlayer === 1
-    ? (score0El.textContent = currentScore)
-    : (score1El.textContent = currentScore);
+
+  //Add current score to total score
+  addCurrentScoreToTotal();
+defineWinner();
+
+
 });
+
+
