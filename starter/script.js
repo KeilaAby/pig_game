@@ -88,19 +88,15 @@ function addCurrentScoreToTotal(){
 
 //Define who is the winner
 function defineWinner(){
-  if (totalScore0 === 100){
+  if (totalScore0 >= 100){
     const player1 = document.querySelector('.player--0')
     player1.style.backgroundColor = '#2f2f2f';
-    // console.log(totalScore0);
 
-  }else if(totalScore1 === 100) {
+  }else if(totalScore1 >= 100) {
     const player2 = document.querySelector('.player--1')
     player2.style.backgroundColor = '#2f2f2f';
     // console.log(totalScore1);
   }
-
-  console.log(totalScore0);
-  console.log(totalScore1);
 
 }
 
