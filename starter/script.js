@@ -99,7 +99,7 @@ s
     player2.style.backgroundColor = '#2f2f2f';
     playing = false;
     
-  }
+  } 
 
 }
 
@@ -125,7 +125,7 @@ btnRoll.addEventListener('click', function () {
     activePlayer === 1
       ? (current0El.textContent = currentScore)
       : (current1El.textContent = currentScore);
-    
+
   }
   //Switch to another player
   else {
