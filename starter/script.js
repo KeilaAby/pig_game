@@ -19,6 +19,7 @@ let totalScore1 = 0;
 score0El.textContent = totalScore0;
 score1El.textContent = totalScore1;
 let currentScore = 0;
+let playing = true;
 
 //Generating random dice roll
 function diceValue() {
@@ -88,14 +89,16 @@ function addCurrentScoreToTotal(){
 
 //Define who is the winner
 function defineWinner(){
-  if (totalScore0 >= 100){
+  if (totalScore0 >= 30){
     const player1 = document.querySelector('.player--0')
     player1.style.backgroundColor = '#2f2f2f';
-
-  }else if(totalScore1 >= 100) {
+    playing = false;
+s
+  }else if(totalScore1 >= 30) {
     const player2 = document.querySelector('.player--1')
     player2.style.backgroundColor = '#2f2f2f';
-    // console.log(totalScore1);
+    playing = false;
+    
   }
 
 }
@@ -103,12 +106,12 @@ function defineWinner(){
 //ROLLING THE DICE
 btnRoll.addEventListener('click', function () {
   
-  //See who is playing (Player 1 or 2)
+  if(playing){
+    //See who is playing (Player 1 or 2)
   const activePlayer = checkActivePlayer();
 
   //Generating random dice roll
   const randomValue = diceValue();
-
 
   //display dice roll (Image)
   displayDice(randomValue);
@@ -122,7 +125,7 @@ btnRoll.addEventListener('click', function () {
     activePlayer === 1
       ? (current0El.textContent = currentScore)
       : (current1El.textContent = currentScore);
-
+    
   }
   //Switch to another player
   else {
@@ -135,6 +138,8 @@ btnRoll.addEventListener('click', function () {
       ? (current0El.textContent = currentScore)
       : (current1El.textContent = currentScore);
   }
+  }
+  
 
 });
 
