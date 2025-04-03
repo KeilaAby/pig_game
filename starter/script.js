@@ -105,6 +105,7 @@ btnHold.addEventListener('click', function () {
   } else {
     //Define winner
     defineWinner(activePlayer);
+    showScore(activePlayer)
   }
 });
 
