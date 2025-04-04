@@ -61,7 +61,7 @@ function switchPlayer() {
     .classList.add('player--active');
 }
 
-//Show current score
+//Show score of current player
 function showScore(playerActive) {
   document.querySelector(`#score--${playerActive}`).textContent =
     scores[playerActive];
